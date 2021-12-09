@@ -226,6 +226,7 @@ lookup_changed_charts() {
     changed_files=$(git diff --find-renames --name-only "$commit" -- "$charts_dir")
 
     local depth=$(( $(tr "/" "\n" <<< "$charts_dir" | sed '/^\(\.\)*$/d' | wc -l) + 1 ))
+    echo "charts_dir is \"$charts_dir\" depth is \"$depth\""
     local fields="1-${depth}"
 
     cut -d '/' -f "$fields" <<< "$changed_files" | uniq | filter_charts
